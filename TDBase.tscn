@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8pki1q4a8sft"]
+
+[ext_resource type="Script" path="res://GameManager.gd" id="1_3jq4a"]
+[ext_resource type="PackedScene" uid="uid://bmvtxn3i6s7le" path="res://level_01.tscn" id="2_iqx16"]
+[ext_resource type="Texture2D" uid="uid://cf7sn3n6dvwqb" path="res://Assets/Tilesheet/colored.png" id="2_y5xoo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q4tc"]
+atlas = ExtResource("2_y5xoo")
+region = Rect2(663, 170, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4be7g"]
+atlas = ExtResource("2_y5xoo")
+region = Rect2(697, 68, 16, 16)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_3jq4a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(256, 129)
+zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 76.0
+offset_bottom = 84.0
+
+[node name="Stats" type="VBoxContainer" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.526
+anchor_bottom = 0.595
+offset_right = 0.0239983
+offset_bottom = -9.98
+
+[node name="Lives" type="HBoxContainer" parent="CanvasLayer/UI/Stats"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/UI/Stats/Lives"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_3q4tc")
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Stats/Lives"]
+layout_mode = 2
+
+[node name="Coins" type="HBoxContainer" parent="CanvasLayer/UI/Stats"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="CanvasLayer/UI/Stats/Coins"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4be7g")
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Stats/Coins"]
+layout_mode = 2
+
+[node name="Tower" type="Control" parent="CanvasLayer/UI"]
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 56.0
+offset_right = 41.0
+offset_bottom = 96.0
+
+[node name="Level-01" parent="." instance=ExtResource("2_iqx16")]
