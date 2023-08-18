@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://qx8iv3x6oxec"]
+
+[ext_resource type="Texture2D" uid="uid://cf7sn3n6dvwqb" path="res://Assets/Tilesheet/colored.png" id="1_cibl8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyoh3"]
+atlas = ExtResource("1_cibl8")
+region = Rect2(255, 323, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gon84"]
+atlas = SubResource("AtlasTexture_nyoh3")
+
+[node name="Node" type="Node"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_gon84")

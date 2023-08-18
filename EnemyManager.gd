@@ -1,6 +1,7 @@
 extends PathFollow2D
 
 @export var speed = 1
+@export var damage = 2
 
 var pathFollow
 
@@ -12,7 +13,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	self.progress_ratio += delta * speed * 0.03
-	
-	
+	self.progress_ratio += delta * speed 
+	if self.progress_ratio >= 1 : 
+		Events.emit_signal("finishedPath",damage)
+		queue_free()
 	pass

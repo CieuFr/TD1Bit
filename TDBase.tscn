@@ -1,8 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8pki1q4a8sft"]
+[gd_scene load_steps=8 format=3 uid="uid://b8pki1q4a8sft"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_3jq4a"]
 [ext_resource type="PackedScene" uid="uid://bmvtxn3i6s7le" path="res://level_01.tscn" id="2_iqx16"]
 [ext_resource type="Texture2D" uid="uid://cf7sn3n6dvwqb" path="res://Assets/Tilesheet/colored.png" id="2_y5xoo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plypw"]
+atlas = ExtResource("2_y5xoo")
+region = Rect2(256, 324, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uhah"]
+atlas = ExtResource("2_y5xoo")
+region = Rect2(697, 68, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3q4tc"]
 atlas = ExtResource("2_y5xoo")
@@ -16,7 +24,7 @@ region = Rect2(697, 68, 16, 16)
 script = ExtResource("1_3jq4a")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(256, 129)
+position = Vector2(280, 153)
 zoom = Vector2(2, 2)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -24,16 +32,64 @@ zoom = Vector2(2, 2)
 [node name="UI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 76.0
-offset_bottom = 84.0
+offset_right = 75.0
+offset_bottom = 83.0
+
+[node name="Tower" type="Control" parent="CanvasLayer/UI"]
+layout_mode = 1
+anchor_left = 0.013
+anchor_top = 0.917
+anchor_right = 0.013
+anchor_bottom = 0.917
+offset_left = -0.975
+offset_top = 51.889
+offset_right = 83.025
+offset_bottom = 192.889
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/Tower"]
+layout_mode = 0
+offset_top = 7.0
+offset_right = 88.0
+offset_bottom = 33.0
+
+[node name="Button" type="Button" parent="CanvasLayer/UI/Tower/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UI/Tower/VBoxContainer/Button"]
+layout_mode = 2
+anchor_top = 0.386
+anchor_bottom = 0.386
+offset_left = 5.0
+offset_top = -11.808
+offset_right = 84.0
+offset_bottom = 14.192
+alignment = 1
+
+[node name="Tower" type="TextureRect" parent="CanvasLayer/UI/Tower/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_plypw")
+expand_mode = 3
+
+[node name="Cost" type="Label" parent="CanvasLayer/UI/Tower/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+text = "20"
+
+[node name="Tower2" type="TextureRect" parent="CanvasLayer/UI/Tower/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_2uhah")
+expand_mode = 3
 
 [node name="Stats" type="VBoxContainer" parent="CanvasLayer/UI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.526
-anchor_bottom = 0.595
-offset_right = 0.0239983
-offset_bottom = -9.98
+anchor_right = 1.28
+anchor_bottom = 1.108
+offset_left = -0.013
+offset_top = 0.0830002
+offset_right = 0.227005
+offset_bottom = -41.881
 
 [node name="Lives" type="HBoxContainer" parent="CanvasLayer/UI/Stats"]
 layout_mode = 2
@@ -41,6 +97,7 @@ layout_mode = 2
 [node name="Icon" type="TextureRect" parent="CanvasLayer/UI/Stats/Lives"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_3q4tc")
+expand_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/UI/Stats/Lives"]
 layout_mode = 2
@@ -51,15 +108,11 @@ layout_mode = 2
 [node name="Icon" type="TextureRect" parent="CanvasLayer/UI/Stats/Coins"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_4be7g")
+expand_mode = 3
 
 [node name="Label" type="Label" parent="CanvasLayer/UI/Stats/Coins"]
 layout_mode = 2
 
-[node name="Tower" type="Control" parent="CanvasLayer/UI"]
-anchors_preset = 0
-offset_left = 1.0
-offset_top = 56.0
-offset_right = 41.0
-offset_bottom = 96.0
-
 [node name="Level-01" parent="." instance=ExtResource("2_iqx16")]
+
+[connection signal="pressed" from="CanvasLayer/UI/Tower/VBoxContainer/Button" to="." method="_on_button_pressed"]
